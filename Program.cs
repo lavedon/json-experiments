@@ -23,18 +23,29 @@ namespace json_experiments
                     .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("token").GetString()));
                 
                 */
-                List<JsonElement> lemmaBlocks = root.EnumerateObject()
+                var lemmaBlocks = root.EnumerateObject()
                     .Where(block => block.Value.ValueKind == JsonValueKind.Array && block.Name == "data")
-                    .SelectMany(block => block.Value
-                    .EnumerateArray()
-                    .Select(t => t.GetProperty("lemmatizations")))
-                    .ToList();
+                    .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("token").GetString()));
 
-                List<string> lemmas = new();
+
                 foreach(var l in lemmaBlocks)
                 {
-                    if (l.TryGetProperty("lemma", out JsonElement lemmaProp)){
-                        lemmas.Add(lemmaProp.GetString());
+                    Console.WriteLine(l);
+                }
+                    /*
+                    if(l.GetArrayLength() != 0)
+                    {
+                        var result = l.EnumerateArray()
+                            .Select(lw => lw.GetProperty("lemma"))
+                            .First();
+
+                        Console.ReadLine();
+                        /*
+                        if (l.TryGetProperty("lemma", out JsonElement lemmaProp)){
+                            lemmas.Add(lemmaProp.GetString());
+                        } else {
+                            lemmas.Add("");
+                        }
                     } else {
                         lemmas.Add("");
                     }
