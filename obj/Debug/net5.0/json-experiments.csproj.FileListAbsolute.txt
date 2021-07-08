@@ -1,0 +1,16 @@
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.exe
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.deps.json
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.runtimeconfig.json
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.runtimeconfig.dev.json
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.dll
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\ref\json-experiments.dll
+C:\my-coding-projects\json-experiments\bin\Debug\net5.0\json-experiments.pdb
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.csproj.AssemblyReference.cache
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.GeneratedMSBuildEditorConfig.editorconfig
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.AssemblyInfoInputs.cache
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.AssemblyInfo.cs
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.csproj.CoreCompileInputs.cache
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.dll
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\ref\json-experiments.dll
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.pdb
+C:\my-coding-projects\json-experiments\obj\Debug\net5.0\json-experiments.genruntimeconfig.cache
