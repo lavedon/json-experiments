@@ -23,50 +23,37 @@ namespace json_experiments
                     .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("token").GetString()));
                 
                 */
-                var lemmaBlocks = root.EnumerateObject()
+                IEnumerable<JsonElement> lemmaBlocks = root.EnumerateObject()
                     .Where(block => block.Value.ValueKind == JsonValueKind.Array && block.Name == "data")
-                    .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("token").GetString()));
+                    .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("lemmatizations")));
 
+                List<JsonElement> lemmaList = new();
 
-                foreach(var l in lemmaBlocks)
-                {
-                    Console.WriteLine(l);
-                }
-                    /*
-                    if(l.GetArrayLength() != 0)
+            lemmaList.AddRange(lemmaBlocks);
+            List<string> lemmaWords = new();
+            for (var i = 0; i < lemmaList.Count; i++)
+            {
+                try {
+                    Console.WriteLine(lemmaList[i].ValueKind);
+                    var lemmas = lemmaList[i].EnumerateArray();
+
+                    while (lemmas.MoveNext())
                     {
-                        var result = l.EnumerateArray()
-                            .Select(lw => lw.GetProperty("lemma"))
-                            .First();
-
+                        Console.WriteLine("Press Enter to get lemma");
                         Console.ReadLine();
-                        /*
-                        if (l.TryGetProperty("lemma", out JsonElement lemmaProp)){
-                            lemmas.Add(lemmaProp.GetString());
-                        } else {
-                            lemmas.Add("");
-                        }
-                    } else {
-                        lemmas.Add("");
+                        Console.WriteLine(lemmas.Current);
+                        var lWord = lemmas.Current.GetProperty("lemma");
+                        Console.WriteLine(lWord);
+                        Console.ReadLine();
                     }
+                } catch {
                 }
-
-                foreach (var t in lemmas)
-                {
-                    Console.WriteLine(t);
-                    Console.ReadLine();
-                }
-/*
-                Console.WriteLine("Press Enter to display Lemmas:");
-                Console.ReadLine();
-                
-
-                foreach (var l in lemmas)
-                {
-                    Console.WriteLine(l);
-                }
-                */
             }
+
+
+
+
         }
     }
+}
 }
