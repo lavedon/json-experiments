@@ -37,14 +37,25 @@ namespace json_experiments
                     Console.WriteLine(lemmaList[i].ValueKind);
                     var lemmas = lemmaList[i].EnumerateArray();
 
+// @TODO make sure if lemmas is blank that a "" word gets added
                     while (lemmas.MoveNext())
                     {
-                        Console.WriteLine("Press Enter to get lemma");
-                        Console.ReadLine();
-                        Console.WriteLine(lemmas.Current);
-                        var lWord = lemmas.Current.GetProperty("lemma");
-                        Console.WriteLine(lWord);
-                        Console.ReadLine();
+
+                        
+                   var lwordsObj = lemmas.Current.EnumerateObject();
+                   while (lwordsObj.MoveNext())
+                   {
+                       if (lwordsObj.Current.Name == "word")
+                       {
+                           Console.WriteLine("Inside Word");
+                           lemmaWords.Add(lwordsObj.Current.Value.GetProperty("lemma").GetString());
+                       } else {
+                        Console.WriteLine(lwordsObj.Current.Name);
+                       }
+
+
+                   }
+                       //  var lWord = lemmas.Current.TryGetProperty("lemma", out JsonElement lemmaElement);
                     }
                 } catch {
                 }
