@@ -10,9 +10,9 @@ namespace json_experiments
     {
         static void Main(string[] args)
         {
-            List<string> lemmas =  new List<string>() { "", "He", "", "Hammock" };
-            List<string> tokens = new List<string>() { "He", "Her", "Him", "Swing"};
-            zipLemmas(tokens, lemmas);
+            List<string> tokens = new List<string>() { "0", "1", "2", "3", "4"};
+            List<string> lemmas =  new List<string>() { "", "One", "", "Three", "" };
+            GetLemmas();
         }
 
         public static void GetLemmas()
@@ -21,6 +21,8 @@ namespace json_experiments
             string data = File.ReadAllText(path);
 
             Dictionary<string, string> wordWithLemmaDict = new();
+            List<String> tokenList = new();
+            List<string> lemmaWords = new();
 
             using (JsonDocument json = JsonDocument.Parse(data))
             {
@@ -35,17 +37,13 @@ namespace json_experiments
                     .SelectMany(block => block.Value.EnumerateArray().Select(subBlock => subBlock.GetProperty("lemmatizations")));
 
                 List<JsonElement> lemmaList = new();
-                List<String> tokenList = new();
 
                 lemmaList.AddRange(lemmaBlocks);
+                tokenList.AddRange(tokens);
 
-                List<string> lemmaWords = new();
+                // @TODO Extract into a local function or method - the actual processing - maybe?
                 for (var i = 0; i < lemmaList.Count; i++)
                 {
-                    foreach (var l in lemmaWords)
-                    {
-                        Console.WriteLine(l);
-                    }
                     try
                     {
                         var lemmas = lemmaList[i].EnumerateArray();
@@ -85,15 +83,16 @@ namespace json_experiments
                         Console.WriteLine(ex);
                     }
                 }
-
-
-
-
-
+            }
+            var result = zipLemmas(tokenList, lemmaWords);
+            Console.WriteLine("Show Results");
+            foreach(var r in result)
+            {
+                Console.WriteLine(r);
             }
         }
 
-        private Dictionary<string, string> zipLemmas(List<string> tokens, List<string> lemmas)
+        private static Dictionary<string, string> zipLemmas(List<string> tokens, List<string> lemmas)
     {
         Dictionary<string, string> zippedLemmas = new();
         for (var i = 0; i < tokens.Count; i++)
@@ -104,10 +103,12 @@ namespace json_experiments
                 {
                     lemmas[y] = tokens[i];
                 }
+                zippedLemmas.Add(tokens[i], lemmas[y]);
+                i++;
             }
 
         }
-        return null;
+        return zippedLemmas;
 
     }
 }
